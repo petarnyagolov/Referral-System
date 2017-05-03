@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/tether/tether.min.css"
+          th:href="@{tether/tether.min.css}"/>
+
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header th:replace="fragments/parts::menu">
+</header>
+<main>
+    <h1 class="h1">Referral Challenges</h1>
+</main>
+<div>This is web site which collect challenges to populate websites and allow to users collect bonuses and moneys for the same platform.</div>
+<div>You must to register and login to see all referrals and to collect all bonuses!</div>
+<script th:src="@{jquery/jquery.min.js}"></script>
+<script th:src="@{tether/tether.min.js}"></script>
+<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+</body>
+<footer th:replace="fragments/parts::footer"></footer>
+</html>

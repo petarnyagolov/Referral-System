@@ -1,0 +1,25 @@
+footer {
+    position: fixed;
+    bottom:0;
+    padding:7px;
+    width:100%;
+    background-color: darkslategrey;
+    box-shadow: 0px 0px 10px black;
+    color:white;
+}
+main{
+    margin-bottom: 50px;
+}
+body{
+    background-color: whitesmoke;
+}
+input, select, button{
+    box-shadow: 0px 0px 5px black;
+}
+.shadow {
+    box-shadow: 0px 0px 5px black;
+}
+
+.text-muted {
+    color: #d83510!important;
+}
