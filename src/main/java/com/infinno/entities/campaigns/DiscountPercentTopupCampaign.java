@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("discountpercent")
-public  abstract class DiscountPercentTopupCampaign  extends Campaign{
+public  class DiscountPercentTopupCampaign  extends Campaign{
 
 
 }

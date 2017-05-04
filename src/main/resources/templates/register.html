@@ -15,7 +15,7 @@
 <main>
     <div class="container">
         <h1>Register Page</h1>
-        <form th:action="@{/register}" method="post" th:object="${registrationModel}">
+        <form method="post" th:object="${registrationModel}">
             <div class="form-group" th:classappend="${#fields.hasErrors('username')} ? 'has-danger'">
                 <label class="form-control-label" for="inputUsername">Username</label>
                 <input type="text" class="form-control form-control-danger" id="inputUsername" th:field="*{username}"/>
@@ -31,6 +31,8 @@
                 <input type="password" class="form-control form-control-danger" id="inputConfirmPassword" th:field="*{confirmPassword}"/>
                 <div class="form-control-feedback" th:each="error : ${#fields.errors('global')}" th:text="${error}">Sorry, passwords are not matching?</div>
             </div>
+            <input th:name="${_csrf.parameterName}"   th:value="${_csrf.token}" type="hidden"/>
+
             <input type="submit" class="btn btn-success" value="Register"/>
         </form>
     </div>

@@ -1,6 +1,7 @@
 package com.infinno.services;
 
 import com.infinno.entities.ReferralIdentifier;
+import com.infinno.entities.Role;
 import com.infinno.entities.User;
 import com.infinno.models.bindingModels.RegistrationModel;
 import com.infinno.repositories.ReferralIdentifierRepository;
@@ -45,6 +46,8 @@ public class UserServiceImpl implements UserService {
         referralIdentifier.setUserHash(UUID.randomUUID().toString());
         this.referralIdentifierRepository.save(referralIdentifier);
         user.setReferralIdentifier(referralIdentifier);
+        Role role=roleService.getDefaultRole();
+        user.addDefaultRole(role);
         this.userRepository.save(user);
 
 

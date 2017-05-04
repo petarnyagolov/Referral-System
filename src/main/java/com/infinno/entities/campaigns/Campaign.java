@@ -3,7 +3,9 @@ package com.infinno.entities.campaigns;
 import com.infinno.entities.events.UserEvent;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,18 +19,26 @@ public  abstract class Campaign {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private String name;
 
     private Date startDate;
 
     private Date endDate;
 
-    private String eventType;
+
+    private String description;
+
+
+
 
     @ManyToMany
     @JoinTable(name = "user_event_campaign",
-            joinColumns = @JoinColumn(name ="campaign_id"),inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private Set<UserEvent> userEvent;
+            joinColumns = @JoinColumn(name = "campaign_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private Set<UserEvent> userEvents;
+
+    public Campaign() {
+        userEvents = new HashSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -38,12 +48,12 @@ public  abstract class Campaign {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getStartDate() {
@@ -62,19 +72,26 @@ public  abstract class Campaign {
         this.endDate = endDate;
     }
 
-    public String getEventType() {
-        return eventType;
+
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 
     public Set<UserEvent> getUserEvent() {
-        return userEvent;
+        return userEvents;
     }
 
     public void setUserEvent(Set<UserEvent> userEvent) {
-        this.userEvent = userEvent;
+        this.userEvents = userEvent;
+    }
+
+    public void addEvent(UserEvent userEvent){
+        this.userEvents.add(userEvent);
     }
 }

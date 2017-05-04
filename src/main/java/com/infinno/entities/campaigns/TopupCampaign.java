@@ -5,9 +5,8 @@ import java.math.BigDecimal;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("topupcampaign")
-public abstract class TopupCampaign extends Campaign {
+public  class TopupCampaign extends Campaign {
 
     private BigDecimal sum;
 

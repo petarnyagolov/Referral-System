@@ -114,4 +114,9 @@ public class User implements UserDetails {
     public void setAuthorities(Set<Role> authorities) {
         this.authorities = authorities;
     }
+    public void addDefaultRole(Role role){
+
+
+        authorities.add(role);
+    }
 }

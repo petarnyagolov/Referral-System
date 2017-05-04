@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CampaignService {
     void save(AddCampaignBindingModel addCampaignBindingModel);
-
+    List<CampaignViewModel> getAllHomePage();
     List<CampaignViewModel> findAllCampaigns();
 
     void deleteById(long virusId);

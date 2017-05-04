@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Campaign</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/tether/tether.min.css"
+          th:href="@{tether/tether.min.css}"/>
+
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header th:replace="fragments/parts::menu">
+</header>
+<main>
+    <h2 class="h2" style="width:250px; margin: auto">Добавяне на кампания</h2>
+
+    <div class="container">
+        <form method="post" th:object="${addCampaignBindingModel}" >
+            <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-danger'">
+                <label for="campaignName">Име на кампанията</label>
+                <input type="text"  th:field = "*{name}" class="form-control" id="campaignName" aria-describedby="corpHelp" placeholder="Име"/>
+                <div class="form-control-feedback" th:each="error : ${#fields.errors('name')}" th:text="${error}">Sorry, name is invalid. Try another?</div>
+            </div>
+            <div class="form-group"  th:classappend="${#fields.hasErrors('startDate')} ? 'has-danger'">
+                <label for="startDate">Начална дата</label>
+                <input type="date" th:field="*{startDate}" class="form-control" id="startDate" />
+                <div class="form-control-feedback" th:each="error : ${#fields.errors('startDate')}" th:text="${error}">Invalid date. Try another?</div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('endDate')} ? 'has-danger'">
+                <label for="endDate">Крайна дата</label>
+                <input type="date" th:field="*{endDate}" class="form-control" id="endDate"/>
+                <div class="form-control-feedback" th:each="error : ${#fields.errors('endDate')}" th:text="${error}">Invalid date. Try another?</div>
+            </div>
+            <div class="form-group">
+                <label for="campaignType">Вид кампания</label>
+                <select class="form-control" th:field="*{campaignType}" onchange="change()" id="campaignType">
+                    <option value="topup">Получаване твърда сума</option>
+                    <option value="discountTopup">Отстъпка с твърда сума</option>
+                    <option value="percentTopup">Получаване на процент от сума</option>
+                    <option value="discountPercentTopup">Отстъпка процент при следващо плащане в платформата</option>
+                </select>
+            </div>
+            <div class="row">
+                <div id="sum" class="col-sm-6" >
+                    <label for="campaignSum">Сума</label>
+                    <input class="form-control" th:field="*{sum}" id="campaignSum" placeholder="0.00" type="text"/>
+                </div>
+                <div id="percent" class="col-sm-6" >
+                    <label for="campaignPercent">Процент</label>
+                    <input class="form-control" th:field="*{percent}" id="campaignPercent" placeholder="0%" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="campaignSelect">Вид на събитието</label>
+                <select class="form-control" th:field="*{userEvent}" id="campaignSelect">
+                    <option value="income">Постъпление/приход</option>
+                    <option value="newUser">Нов потребител</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionCampaign">Описание</label>
+                <input  class="form-control" th:field="*{description}" id="descriptionCampaign" rows="3" style="box-shadow: 0px 0px 5px black;"/>
+            </div>
+
+
+            <div class="form-group"><button type="submit" class="btn btn-primary"  >Добави кампания</button></div>
+            <input th:name="${_csrf.parameterName}"   th:value="${_csrf.token}" type="hidden"/>
+
+        </form>
+    </div>
+</main>
+<script th:src="@{jquery/jquery.min.js}"></script>
+<script th:src="@{tether/tether.min.js}"></script>
+<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{bootstrap/js/script.js}"></script>
+<footer th:replace="fragments/parts::footer"></footer>
+</body>
+
+</html>
