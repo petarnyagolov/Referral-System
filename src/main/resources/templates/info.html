@@ -11,25 +11,13 @@
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-
-
-
+<header th:replace="fragments/parts::menu">
+</header>
 <main>
     <h1 class="h1">Кампании</h1>
 </main>
-
-
-<body>
-<header th:replace="fragments/parts::menu"></header>
-
-
-<main th:replace="~{${view}}"></main>
-
-<footer th:replace="~{fragments/footer}"></footer>
-
-<span th:insert="~{fragments/scripts-bundle}"></span>
-
-</body>
+<div>Това е уебплатформа, която позволява на потребителите да печелят награди по формата на сума, сума която могат да използват само в платформата,сума процент от даден приход и процент отстъпка при следващо плащане в съответната платформа. </div>
+<div>За да се случи това трябва да регистрирате специални потребители, които да работят и така да получавате наградите за съответната кампания!</div>
 <script th:src="@{jquery/jquery.min.js}"></script>
 <script th:src="@{tether/tether.min.js}"></script>
 <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>

@@ -17,11 +17,14 @@
             </li>
             <div sec:authorize="isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link" href="/campains/all">Всички кампании</a>
+                    <a class="nav-link" href="/campaigns/all">Всички кампании</a>
                 </li>
             </div>
             <li class="nav-item">
                 <a class="nav-link" href="/register">Регистрирация</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/info">Информация</a>
             </li>
             <li class="nav-item pull-xs-right" sec:authorize="isAnonymous()">
                 <a class="nav-link" href="/login">Вписване</a>

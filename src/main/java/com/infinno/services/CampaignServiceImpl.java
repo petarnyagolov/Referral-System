@@ -69,22 +69,48 @@ public class CampaignServiceImpl implements CampaignService {
 
     }
 
+
+
     @Override
     public List<CampaignViewModel> findAllCampaigns() {
 
         List<CampaignViewModel> models = new ArrayList<>();
-        List<Campaign> campaigns = (List<Campaign>) this.campaignRepository.findAll();
+        Iterable<Campaign> campaigns;
+        campaigns =  this.campaignRepository.findAll();
         for (Campaign campaign : campaigns) {
 
             CampaignViewModel model = this.modelMapper.map(campaign, CampaignViewModel.class);
 
+            switch (campaign.getClass().getSimpleName()){
+                case "TopupCampaign":
+                    model.setTypeCampaign("Получаване на твърда сума");
+                    break;
+                case "PercentTopupCampaign":
+                    model.setTypeCampaign("Получаване на процент от сума");
+                    break;
+                case "DiscountTopupCampaign":
+                    model.setTypeCampaign("Отстъпка с твърда сума за следващо плащане");
+                    break;
+                case "DiscountPercentTopupCampaign":
+                    model.setTypeCampaign("Отстъпка с процент за следващо плащане");
+                    break;
+            }
+            switch (campaign.getUserEvent().iterator().next().getClass().getSimpleName()){
+                case "NewUserEvent":
+                    model.setTypeEvent("Доведен потребител");
+                    break;
+                case "IncomeUserEvent":
+                    model.setTypeEvent("Парични постъпления");
+                    break;
+
+            }
             models.add(model);
         }
 
         return models;
     }
 
-    public List<CampaignViewModel> getAllHomePage(){
+    public List<CampaignViewModel> getAllCampaign(){
         Iterable<Campaign> campaigns = this.campaignRepository.findAll();
 
         List<CampaignViewModel> campaignViews = new ArrayList<>();

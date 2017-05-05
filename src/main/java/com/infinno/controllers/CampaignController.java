@@ -4,6 +4,7 @@ import com.infinno.models.bindingModels.AddCampaignBindingModel;
 import com.infinno.models.viewModels.CampaignViewModel;
 import com.infinno.services.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,15 +44,21 @@ public class CampaignController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public String index(Model model) {
-        List<CampaignViewModel> viewModels = this.campaignService.getAllHomePage();
 
-        model.addAttribute("view", "home/index");
-//        model.addAttribute("title", "Home");
-        model.addAttribute("games", viewModels);
+        List<CampaignViewModel> views = this.campaignService.findAllCampaigns();
 
-        return "base-layout";
+        model.addAttribute("view",views);
+
+
+
+
+
+        return "index";
+    }
+    public String campaignNotFound(CampaignNotFoundException.class){
+
     }
 
 

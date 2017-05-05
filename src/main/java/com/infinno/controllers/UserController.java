@@ -30,6 +30,11 @@ public class UserController {
         return "home";
     }
 
+    @GetMapping("/info")
+    public String getInformation(){
+        return "info";
+    }
+
     @GetMapping("/register")
     public String getRegisterPage(@ModelAttribute RegistrationModel registrationModel){
 

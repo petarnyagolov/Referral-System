@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8"/>
+<title>Home</title>
+<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+      th:href="@{bootstrap/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../static/tether/tether.min.css"
+      th:href="@{tether/tether.min.css}"/>
+
+<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+<body>
+<header th:replace="fragments/parts::menu">
+</header>
+<main>
+    <div class="text-center"><h3 class="display-3">Всички кампании</h3></div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-3" th:each="view:${view}">
+                <div class="card">
+                            <div class="card-block">
+                                <p class="card-title">Име кампания</p>
+                                <h4 class="card-text" th:text="${view.campaignName}"></h4>
+                                <h4 class="card-title">Описание</h4>
+                                <p class="card-text" th:text="${view.description}" ></p>
+                                <h4 class="card-title">Начало</h4>
+                                <p class="card-text" th:text="${view.startDate}" ></p>
+                                <h4 class="card-title">Край</h4>
+                                <p class="card-text" th:text="${view.endDate}" ></p>
+                                <h4 class="card-title">Вид кампания</h4>
+                                <p class="card-text" th:text="${view.typeCampaign}" ></p>
+                                <h4 class="card-title">Вид събитие</h4>
+                                <p class="card-text" th:text="${view.typeEvent}" ></p>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+</main>
+<div>Това е уебплатформа, която позволява на потребителите да печелят награди по формата на сума, сума която могат да използват само в платформата,сума процент от даден приход и процент отстъпка при следващо плащане в съответната платформа. </div>
+<div>За да се случи това трябва да регистрирате специални потребители, които да работят и така да получавате наградите за съответната кампания!</div>
+<input th:name="${_csrf.parameterName}"   th:value="${_csrf.token}" type="hidden"/>
+<script th:src="@{jquery/jquery.min.js}"></script>
+<script th:src="@{tether/tether.min.js}"></script>
+<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+<footer th:replace="fragments/parts::footer"></footer>
+</body>
+
+</html>
