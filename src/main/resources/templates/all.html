@@ -12,25 +12,25 @@
 <header th:replace="fragments/parts::menu">
 </header>
 <main>
-    <div class="text-center"><h3 class="display-3">Информация за кампанията</h3></div>
+    <div class="text-center"><h3 class="display-3">Всички кампании</h3></div>
     <div class="container">
 
         <div class="row">
             <div class="col-3" th:each="view:${view}">
                 <div class="card">
                             <div class="card-block">
-                                <!--<p class="card-title">Име кампания</p>-->
+                                <small class="card-title">Име кампания:</small>
                                 <h4 class="card-text" th:text="${view.campaignName}"></h4>
-                                <!--<h4 class="card-title">Описание</h4>-->
-                                <p class="card-text" th:text="${view.description}" ></p>
-                                <!--<h4 class="card-title">Начало</h4>-->
-                                <p class="card-text" th:text="${view.startDate}" ></p>
-                                <!--<h4 class="card-title">Край</h4>-->
-                                <p class="card-text" th:text="${view.endDate}" ></p>
-                                <!--<h4 class="card-title">Вид кампания</h4>-->
-                                <p class="card-text" th:text="${view.typeCampaign}" ></p>
-                                <!--<h4 class="card-title">Вид събитие</h4>-->
-                                <p class="card-text" th:text="${view.typeEvent}" ></p>
+                                <small class="card-title">Описание:</small>
+                                <h4 class="card-text" th:text="${view.description}" ></h4>
+                                <small class="card-title">Начало:</small>
+                                <h4 class="card-text" th:text="${view.startDate}" ></h4>
+                                <small class="card-title">Край:</small>
+                                <h4 class="card-text" th:text="${view.endDate}" ></h4>
+                                <small class="card-title">Вид кампания:</small>
+                                <h4 class="card-text" th:text="${view.typeCampaign}" ></h4>
+                                <small class="card-title">Вид събитие:</small>
+                                <h4 class="card-text" th:text="${view.typeEvent}" ></h4>
                             </div>
                         </div>
                 </div>

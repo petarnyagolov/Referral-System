@@ -10,5 +10,7 @@ public interface CampaignService {
 
     List<CampaignViewModel> findAllCampaigns();
 
+    CampaignViewModel findById(long id);
+
     void deleteById(long virusId);
 }

@@ -1,5 +1,6 @@
 package com.infinno.controllers;
 
+import com.infinno.exception.CampaignNotFoundException;
 import com.infinno.models.bindingModels.AddCampaignBindingModel;
 import com.infinno.models.viewModels.CampaignViewModel;
 import com.infinno.services.CampaignService;
@@ -8,10 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -50,15 +48,19 @@ public class CampaignController {
         List<CampaignViewModel> views = this.campaignService.findAllCampaigns();
 
         model.addAttribute("view",views);
+        return "all";
+    }
 
-
-
-
-
+    @GetMapping("/show/{id}")
+    public String showCampaign(Model model,@PathVariable long id){
+        CampaignViewModel campaignViewModel = this.campaignService.findById(id);
+        model.addAttribute("view",campaignViewModel);
         return "index";
     }
-    public String campaignNotFound(CampaignNotFoundException.class){
 
+    @ExceptionHandler(CampaignNotFoundException.class)
+    public String campaignNotFound(){
+        return "campaign-not-found";
     }
 
 
