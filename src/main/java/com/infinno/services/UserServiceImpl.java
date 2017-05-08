@@ -4,6 +4,7 @@ import com.infinno.entities.ReferralIdentifier;
 import com.infinno.entities.Role;
 import com.infinno.entities.User;
 import com.infinno.models.bindingModels.RegistrationModel;
+import com.infinno.models.viewModels.UserViewModel;
 import com.infinno.repositories.ReferralIdentifierRepository;
 import com.infinno.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -51,6 +53,12 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
 
 
+    }
+
+    @Override
+    public List<UserViewModel> findById(long id) {
+        this.userRepository.findOne(id);
+        return null;
     }
 
     @Override

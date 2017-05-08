@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8"/>
-<title>Home</title>
+<title>All</title>
 <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
       th:href="@{bootstrap/css/bootstrap.min.css}"/>
 <link rel="stylesheet" href="../static/tether/tether.min.css"
@@ -31,7 +31,14 @@
                                 <h4 class="card-text" th:text="${view.typeCampaign}" ></h4>
                                 <small class="card-title">Вид събитие:</small>
                                 <h4 class="card-text" th:text="${view.typeEvent}" ></h4>
+                                <div class="card-footer">
+
+                                    <a class="card-button btn btn-outline-primary"
+                                       th:href="@{/campaigns/show/{id}(id = *{view.id})}">Info</a>
+                                </div>
                             </div>
+
+                    <input th:name="${_csrf.parameterName}"   th:value="${_csrf.token}" type="hidden"/>
                         </div>
                 </div>
 

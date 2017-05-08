@@ -60,7 +60,7 @@ public class CampaignController {
 
     @ExceptionHandler(CampaignNotFoundException.class)
     public String campaignNotFound(){
-        return "campaign-not-found";
+        return "exceptions/campaign-not-found";
     }
 
 

@@ -2,6 +2,8 @@ package com.infinno.controllers;
 
 import com.infinno.errors.Error;
 import com.infinno.models.bindingModels.RegistrationModel;
+import com.infinno.models.viewModels.CampaignViewModel;
+import com.infinno.models.viewModels.UserViewModel;
 import com.infinno.services.RoleService;
 import com.infinno.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -61,6 +64,14 @@ public class UserController {
         }
 
         return "login";
+    }
+
+    @GetMapping("/profile")
+    public String getProfile(Model model,long id){
+        List<UserViewModel> views = this.userService.findById(id);
+
+        model.addAttribute("view",views);
+        return "profile";
     }
 
 

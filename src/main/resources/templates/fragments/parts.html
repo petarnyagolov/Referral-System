@@ -20,7 +20,7 @@
                     <a class="nav-link" href="/campaigns/all">Всички кампании</a>
                 </li>
             </div>
-            <li class="nav-item">
+            <li class="nav-item pull-xs-right" sec:authorize="isAnonymous()">
                 <a class="nav-link" href="/register">Регистрирация</a>
             </li>
             <li class="nav-item">
@@ -31,6 +31,9 @@
             </li>
             <li class="nav-item pull-xs-right" sec:authorize="isAuthenticated()">
                 <a class="nav-link" href="/logout">Отписване</a>
+            </li>
+            <li class="nav-item pull-xs-right" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/profile">Профил</a>
             </li>
         </ul>
     </div>
