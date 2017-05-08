@@ -33,7 +33,7 @@ public class AddCampaignBindingModel {
     private long percent;
 
 
-    private String userEvent;
+    private String eventType;
 
 
 
@@ -89,12 +89,13 @@ public class AddCampaignBindingModel {
         this.percent = percent;
     }
 
-    public String getUserEvent() {
-        return userEvent;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setUserEvent(String userEvent) {
-        this.userEvent = userEvent;
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
     public String getDescription() {

@@ -28,6 +28,8 @@ public  abstract class Campaign {
 
     private String description;
 
+    private String eventType;
+
 
 
 
@@ -37,7 +39,16 @@ public  abstract class Campaign {
     private Set<UserEvent> userEvents;
 
     public Campaign() {
-        userEvents = new HashSet<>();
+        this.userEvents=new HashSet<>();
+
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
     public Long getId() {
@@ -82,6 +93,13 @@ public  abstract class Campaign {
         this.description = description;
     }
 
+    public Set<UserEvent> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(Set<UserEvent> userEvents) {
+        this.userEvents = userEvents;
+    }
 
     public Set<UserEvent> getUserEvent() {
         return userEvents;
