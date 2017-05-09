@@ -5,7 +5,10 @@ import com.infinno.models.bindingModels.AddCampaignBindingModel;
 import com.infinno.models.viewModels.CampaignViewModel;
 import com.infinno.services.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,11 +46,13 @@ public class CampaignController {
     }
 
     @GetMapping("/all")
-    public String index(Model model) {
+    public String index(Model model,@PageableDefault(size = 3) Pageable pageable) {
 
-        List<CampaignViewModel> views = this.campaignService.findAllCampaigns();
-
-        model.addAttribute("view",views);
+//        List<CampaignViewModel> views = this.campaignService.findAllCampaigns();
+//
+//        model.addAttribute("view",views);
+        Page<CampaignViewModel> campagns = this.campaignService.findAll(pageable);
+        model.addAttribute("view",campagns);
         return "all";
     }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8"/>
-<title>All</title>
+<title>Home</title>
 <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
       th:href="@{/bootstrap/css/bootstrap.min.css}"/>
 <link rel="stylesheet" href="../static/tether/tether.min.css"
@@ -12,33 +12,25 @@
 <header th:replace="fragments/parts::menu">
 </header>
 <main>
-    <div class="text-center"><h3 class="display-3">Всички кампании</h3></div>
+    <div class="text-center"><h3 class="display-3">Профил</h3></div>
     <div class="container">
 
         <div class="row">
-            <div class="col-4" th:each="view:${view}">
+            <div class="col-12" th:each="view:${view}">
                 <div class="card">
                             <div class="card-block">
-                                <small class="card-title">Име кампания:</small>
-                                <h4 class="card-text" th:text="${view.campaignName}"></h4>
-                                <small class="card-title">Описание:</small>
-                                <h4 class="card-text" th:text="${view.description}" ></h4>
-                                <small class="card-title">Начало:</small>
-                                <h4 class="card-text" th:text="${view.startDate}" ></h4>
-                                <small class="card-title">Край:</small>
-                                <h4 class="card-text" th:text="${view.endDate}" ></h4>
-                                <small class="card-title">Вид кампания:</small>
-                                <h4 class="card-text" th:text="${view.typeCampaign}" ></h4>
-                                <small class="card-title">Вид събитие:</small>
-                                <h4 class="card-text" th:text="${view.eventType}" ></h4>
-                                <div class="card-footer">
-
-                                    <a class="card-button btn btn-outline-primary"
-                                       th:href="@{/campaigns/show/{id}(id = *{view.id})}">Info</a>
-                                </div>
+                                <span class="card-title">Потребителско име:</span>
+                                <h4 class="card-text" th:text="${view.username}"></h4>
+                                <span class="card-title">Идентификационен код:</span>
+                                <h4 class="card-text" th:text="${view.referralCode}" ></h4>
+                                <span class="card-title">Баланс:</span>
+                                <h4 class="card-text" th:text="${view.amount}" ></h4>
+                                <span class="card-title">Отстъпка в проценти:</span>
+                                <h4 class="card-text" th:text="${view.discountPercent}" ></h4>
+                                <span class="card-title">Отстъпка със сума:</span>
+                                <h4 class="card-text" th:text="${view.discountMoney}" ></h4>
+                                <a class="btn btn-primary" href="/campaigns/all">Go back to Campaigns</a>
                             </div>
-
-                    <input th:name="${_csrf.parameterName}"   th:value="${_csrf.token}" type="hidden"/>
                         </div>
                 </div>
 

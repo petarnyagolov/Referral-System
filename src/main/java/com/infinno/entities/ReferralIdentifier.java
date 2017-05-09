@@ -21,6 +21,8 @@ public class ReferralIdentifier {
 
     private int percent;
 
+    private BigDecimal discountMoney;
+
     public long getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class ReferralIdentifier {
 
     public void setPercent(int percent) {
         this.percent = percent;
+    }
+
+    public BigDecimal getDiscountMoney() {
+        return discountMoney;
+    }
+
+    public void setDiscountMoney(BigDecimal discountMoney) {
+        this.discountMoney = discountMoney;
     }
 }

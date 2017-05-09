@@ -43,14 +43,6 @@ public  abstract class Campaign {
 
     }
 
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-
     public Long getId() {
         return id;
     }
@@ -83,8 +75,6 @@ public  abstract class Campaign {
         this.endDate = endDate;
     }
 
-
-
     public String getDescription() {
         return description;
     }
@@ -93,23 +83,19 @@ public  abstract class Campaign {
         this.description = description;
     }
 
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
     public Set<UserEvent> getUserEvents() {
         return userEvents;
     }
 
     public void setUserEvents(Set<UserEvent> userEvents) {
         this.userEvents = userEvents;
-    }
-
-    public Set<UserEvent> getUserEvent() {
-        return userEvents;
-    }
-
-    public void setUserEvent(Set<UserEvent> userEvent) {
-        this.userEvents = userEvent;
-    }
-
-    public void addEvent(UserEvent userEvent){
-        this.userEvents.add(userEvent);
     }
 }

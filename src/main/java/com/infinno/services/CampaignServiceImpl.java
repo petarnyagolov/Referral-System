@@ -11,6 +11,9 @@ import com.infinno.repositories.CampaignRepository;
 import com.infinno.repositories.EventRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,14 +22,17 @@ import java.util.List;
 @Service
 public class CampaignServiceImpl implements CampaignService {
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    private final CampaignRepository campaignRepository;
+
 
     @Autowired
-    private CampaignRepository campaignRepository;
+    public CampaignServiceImpl(ModelMapper modelMapper, CampaignRepository campaignRepository) {
+        this.modelMapper = modelMapper;
+        this.campaignRepository = campaignRepository;
 
-    @Autowired
-    private EventRepository eventRepository;
+    }
 
     @Override
     public void save(AddCampaignBindingModel addCampaignBindingModel) {
@@ -61,7 +67,7 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
 private   void setEventAndCampaignInView(Campaign campaign,CampaignViewModel model){
-
+    
     switch (campaign.getClass().getSimpleName()){
         case "TopupCampaign":
             model.setTypeCampaign("Получаване на твърда сума");
@@ -76,36 +82,37 @@ private   void setEventAndCampaignInView(Campaign campaign,CampaignViewModel mod
             model.setTypeCampaign("Отстъпка с процент за следващо плащане");
             break;
     }
-    switch (campaign.getUserEvent().iterator().next().getClass().getSimpleName()){
-        case "NewUserEvent":
-            model.setTypeEvent("Доведен потребител");
+
+    switch (campaign.getEventType()){
+        case "newUser":
+            model.setEventType("Доведен потребител");
             break;
-        case "IncomeUserEvent":
-            model.setTypeEvent("Парични постъпления");
+        case "income":
+            model.setEventType("Парични постъпления");
             break;
 
     }
 
 }
-
-    @Override
-    public List<CampaignViewModel> findAllCampaigns() {
-
-        List<CampaignViewModel> models = new ArrayList<>();
-        Iterable<Campaign> campaigns;
-        campaigns =  this.campaignRepository.findAll();
-        for (Campaign campaign : campaigns) {
-
-            CampaignViewModel model = this.modelMapper.map(campaign, CampaignViewModel.class);
-            if (campaign.getDescription().length()>17){
-                model.setDescription(campaign.getDescription().substring(0,14)+"...");
-            }
-            setEventAndCampaignInView(campaign,model);
-            models.add(model);
-        }
-
-        return models;
-    }
+//
+//    @Override
+//    public List<CampaignViewModel> findAllCampaigns() {
+//
+//        List<CampaignViewModel> models = new ArrayList<>();
+//        Iterable<Campaign> campaigns;
+//        campaigns =  this.campaignRepository.findAll();
+//        for (Campaign campaign : campaigns) {
+//
+//            CampaignViewModel model = this.modelMapper.map(campaign, CampaignViewModel.class);
+//            if (campaign.getDescription().length()>17){
+//                model.setDescription(campaign.getDescription().substring(0,14)+"...");
+//            }
+//            setEventAndCampaignInView(campaign,model);
+//            models.add(model);
+//        }
+//
+//        return models;
+//    }
 
     @Override
     public CampaignViewModel findById(long id) {
@@ -119,21 +126,39 @@ private   void setEventAndCampaignInView(Campaign campaign,CampaignViewModel mod
         return model;
     }
 
-    public List<CampaignViewModel> getAllCampaign(){
-        Iterable<Campaign> campaigns = this.campaignRepository.findAll();
-
-        List<CampaignViewModel> campaignViews = new ArrayList<>();
+    @Override
+    public Page<CampaignViewModel> findAll(Pageable pageable) {
+        Page<Campaign> campaigns = this.campaignRepository.findAll(pageable);
+        List<CampaignViewModel> campaignViewModelList = new ArrayList<>();
         for (Campaign campaign : campaigns) {
-            CampaignViewModel campaignViewModel = new CampaignViewModel();
-
-            this.modelMapper.map(campaign, campaignViewModel);
-
-
-            campaignViews.add(campaignViewModel);
+            CampaignViewModel campaignViewModel = this.modelMapper.map(campaign,CampaignViewModel.class);
+            if (campaign.getDescription().length()>17){
+                campaignViewModel.setDescription(campaign.getDescription().substring(0,14)+"...");
+            }
+            setEventAndCampaignInView(campaign,campaignViewModel);
+            campaignViewModelList.add(campaignViewModel);
         }
+        Page<CampaignViewModel> models = new PageImpl<CampaignViewModel>(campaignViewModelList,pageable,campaigns.getTotalElements());
 
-        return campaignViews;
+
+        return models;
     }
+
+//    public List<CampaignViewModel> getAllCampaign(){
+//        Iterable<Campaign> campaigns = this.campaignRepository.findAll();
+//
+//        List<CampaignViewModel> campaignViews = new ArrayList<>();
+//        for (Campaign campaign : campaigns) {
+//            CampaignViewModel campaignViewModel = new CampaignViewModel();
+//
+//            this.modelMapper.map(campaign, campaignViewModel);
+//
+//
+//            campaignViews.add(campaignViewModel);
+//        }
+//
+//        return campaignViews;
+//    }
 
 
 

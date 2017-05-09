@@ -1,15 +1,10 @@
 package com.infinno.models.bindingModels;
 
-import com.infinno.annotations.PresentOrFuture;
-import com.infinno.entities.events.UserEvent;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Set;
 
 
 public class AddCampaignBindingModel {

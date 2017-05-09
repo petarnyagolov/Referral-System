@@ -9,13 +9,14 @@ import com.infinno.repositories.ReferralIdentifierRepository;
 import com.infinno.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encryptedPassword);
         ReferralIdentifier referralIdentifier = new ReferralIdentifier();
         referralIdentifier.setAmount(new BigDecimal("0"));
+        referralIdentifier.setDiscountMoney(new BigDecimal("0"));
         referralIdentifier.setReferralCode(UUID.randomUUID().toString());
         referralIdentifier.setUserHash(UUID.randomUUID().toString());
         this.referralIdentifierRepository.save(referralIdentifier);
@@ -56,9 +58,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserViewModel> findById(long id) {
-        this.userRepository.findOne(id);
-        return null;
+    public UserViewModel findByUsername(String username) {
+        User user = this.userRepository.findOneByUsername(username);
+        UserViewModel userViewModel = this.modelMapper.map(user,UserViewModel.class);
+        System.out.println(userViewModel.getId());
+        ReferralIdentifier referralIdentifier = this.referralIdentifierRepository.findOne(userViewModel.getId());
+        System.out.println();
+        userViewModel.setDiscountMoney(referralIdentifier.getDiscountMoney()+"лв.");
+        userViewModel.setAmount(referralIdentifier.getAmount()+"лв.");
+        userViewModel.setDiscountPercent(referralIdentifier.getPercent()+"%");
+        return userViewModel;
     }
 
     @Override

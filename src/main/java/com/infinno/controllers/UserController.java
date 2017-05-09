@@ -1,5 +1,7 @@
 package com.infinno.controllers;
 
+import com.infinno.entities.ReferralIdentifier;
+import com.infinno.entities.User;
 import com.infinno.errors.Error;
 import com.infinno.models.bindingModels.RegistrationModel;
 import com.infinno.models.viewModels.CampaignViewModel;
@@ -7,6 +9,8 @@ import com.infinno.models.viewModels.UserViewModel;
 import com.infinno.services.RoleService;
 import com.infinno.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,10 +71,14 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String getProfile(Model model,long id){
-        List<UserViewModel> views = this.userService.findById(id);
+    public String getProfile(Model model){
 
-        model.addAttribute("view",views);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        //System.out.println(user.getUsername());
+        UserViewModel view = this.userService.findByUsername(user.getUsername());
+
+        model.addAttribute("view",view);
         return "profile";
     }
 

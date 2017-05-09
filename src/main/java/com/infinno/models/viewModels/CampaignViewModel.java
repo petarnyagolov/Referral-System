@@ -8,7 +8,7 @@ public class CampaignViewModel {
 
     private String campaignName;
 
-    private String typeEvent;
+    private String eventType;
 
     private String typeCampaign;
 
@@ -40,12 +40,12 @@ public class CampaignViewModel {
         this.campaignName = campaignName;
     }
 
-    public String getTypeEvent() {
-        return typeEvent;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setTypeEvent(String typeEvent) {
-        this.typeEvent = typeEvent;
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
     public String getTypeCampaign() {
