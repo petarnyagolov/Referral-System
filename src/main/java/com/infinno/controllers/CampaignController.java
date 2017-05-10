@@ -51,8 +51,8 @@ public class CampaignController {
 //        List<CampaignViewModel> views = this.campaignService.findAllCampaigns();
 //
 //        model.addAttribute("view",views);
-        Page<CampaignViewModel> campagns = this.campaignService.findAll(pageable);
-        model.addAttribute("view",campagns);
+        Page<CampaignViewModel> campaigns = this.campaignService.findAll(pageable);
+        model.addAttribute("view",campaigns);
         return "all";
     }
 

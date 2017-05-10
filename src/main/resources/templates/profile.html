@@ -40,10 +40,12 @@
 <div>Това е уебплатформа, която позволява на потребителите да печелят награди по формата на сума, сума която могат да използват само в платформата,сума процент от даден приход и процент отстъпка при следващо плащане в съответната платформа. </div>
 <div>За да се случи това трябва да регистрирате специални потребители, които да работят и така да получавате наградите за съответната кампания!</div>
 <input th:name="${_csrf.parameterName}"   th:value="${_csrf.token}" type="hidden"/>
+<footer th:replace="fragments/parts::footer"></footer>
+</body>
 <script th:src="@{/jquery/jquery.min.js}"></script>
 <script th:src="@{/tether/tether.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-<footer th:replace="fragments/parts::footer"></footer>
-</body>
-
+<script>
+    
+</script>
 </html>

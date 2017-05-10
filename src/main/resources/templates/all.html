@@ -44,6 +44,16 @@
 
             </div>
         </div>
+    <br/>
+    <nav aria-label="Page navigation" th:if="!${#lists.isEmpty(view)}">
+    <ul class="pagination">
+        <li class="page-item" th:classappend="!${view.hasPrevious()} ? 'disabled'"><a class="page-link" href="#" th:href="${view.hasPrevious()} ? '/campaigns/all?page=' + ${view.previousPageable().getPageNumber()}" >Предишна</a></li>
+        <li class="page-item" th:each="i : ${#numbers.sequence(0,view.getTotalPages()-1)}">
+            <a class="page-link" href="#" th:href="|/campaigns/all?page=${i}|" th:text="${i+1}">1</a>
+        </li>
+        <li class="page-item" th:classappend="!${view.hasNext()} ? 'disabled'"><a class="page-link" href="#" th:href="${view.hasNext()} ? '/campaigns/all?page=' + ${view.nextPageable().getPageNumber()}" >Следваща</a></li>
+    </ul>
+    </nav>
 </main>
 <div>Това е уебплатформа, която позволява на потребителите да печелят награди по формата на сума, сума която могат да използват само в платформата,сума процент от даден приход и процент отстъпка при следващо плащане в съответната платформа. </div>
 <div>За да се случи това трябва да регистрирате специални потребители, които да работят и така да получавате наградите за съответната кампания!</div>
